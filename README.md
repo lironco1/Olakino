@@ -1,6 +1,6 @@
 # Olakino
 
-#Liron Cohen take part as Front-End
+# Liron Cohen take part as Front-End
 ## אפליקציית Olakino  אשר מתאימה לכל אדם אימונים ותוכנית תזונתית אישית.
 
 ### וכך זה עובד : 
