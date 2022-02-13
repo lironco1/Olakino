@@ -1,0 +1,21 @@
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "bar.haran1@gmail.com",
+  "password": "P@ssword1234"
+}
+> {%
+    client.global.set("auth_token", response.body.access_token);
+%}
+
+### Get recipes based on query param, in this example "breakfast" param
+GET {{host}}/nutrition/recipes/breakfast
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+### Get users daily meal plan
+GET {{host}}/nutrition/daily
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+

@@ -1,0 +1,86 @@
+### Basic user registration
+POST {{host}}/signup
+Content-Type: application/json
+
+{
+  "first_name": "Bar",
+  "last_name": "Haran",
+  "password": "P@ssword1234",
+  "email": "bar.haran1@gmail.com"
+}
+> {%
+    client.global.set("auth_token", response.body.access_token);
+%}
+
+### Create user profile
+POST {{host}}/create_profile
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "basic": {
+    "age": 25,
+    "gender": {
+      "value": "Male",
+      "label": "Male"
+    },
+    "height": 170,
+    "weight": 70
+  },
+  "diet": {
+    "excluded": [
+      "eggs", "pasta"
+    ],
+    "preferences": [
+    {
+        "value": "0",
+        "label": "Vegan"
+    },
+    {
+        "value": "1",
+        "label": "Vegetarian"
+    },
+    {
+        "value": "2",
+        "label": "Gluten-Free"
+    }
+]
+  },
+  "medical": {
+    "symptoms": [
+      {
+        "value": "5",
+        "label": "Stress"
+      }
+    ],
+    "diseases": []
+  },
+  "workouts": {
+    "goal": {
+      "value": "1",
+      "label": "Build Muscles"
+    },
+    "method": {
+      "value": "2",
+      "label": "resistance"
+    },
+    "type": {
+      "value": "0",
+      "label": "Weights"
+    },
+    "first_day": {
+      "value": "0",
+      "label": "Sunday"
+    }
+  }
+}
+
+###
+
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "bar.haran1@gmail.com",
+  "password": "P@ssword1234"
+}

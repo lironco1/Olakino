@@ -1,0 +1,110 @@
+POST http://localhost:5000/create_profile
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="93", " Not;A Brand";v="99", "Chromium";v="93"
+Accept: application/json, text/plain, */*
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzEyNzkyNjAsImV4cCI6MTYzMTM2NTY2MCwianRpIjoiOTgzY2ZjNDUtZGY5MS00ZDVmLWJiYWYtZmFjNjI4MDZmMGFhIiwiaWQiOjEwLCJybHMiOiIiLCJyZl9leHAiOjE2MzM4NzEyNjB9.y8__tUEWdd30cadOBxk8n4Wf6I7VZ4PV1XXg_NJRE4M
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36
+sec-ch-ua-platform: "Windows"
+Origin: http://localhost:3000
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:3000/
+Accept-Language: en-US,en;q=0.9,he-IL;q=0.8,he;q=0.7
+Content-Type: application/json
+
+{
+  "basic": {
+    "age": 25,
+    "gender": {
+      "value": "Male",
+      "label": "Male"
+    },
+    "height": 170,
+    "weight": 70
+  },
+  "diet": {
+    "exclude_meals": [
+      {
+        "meal": ""
+      },
+      {
+        "meal": ""
+      },
+      {
+        "meal": ""
+      }
+    ],
+    "preferences": []
+  },
+  "medical": {
+    "symptoms": [],
+    "diseases": []
+  },
+  "workouts": {
+    "goal": {
+      "value": "2",
+      "label": "Stay Active"
+    },
+    "method": {
+      "value": "1",
+      "label": "Cardio"
+    },
+    "type": {
+      "value": "0",
+      "label": "Bodyweight"
+    },
+    "frequency": {
+      "value": "0",
+      "label": "3 times a week"
+    },
+    "first_day": {
+      "value": "0",
+      "label": "Sunday"
+    },
+    "level": {
+      "value": "0",
+      "label": "Beginner"
+    }
+  }
+}
+
+###
+
+
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "bar.haran1@gmail.com",
+  "password": "P@ssword1234"
+}
+> {%
+    client.global.set("auth_token", response.body.access_token);
+%}
+
+### Get muscle categories
+GET {{host}}/muscle_categories
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### Get exercises by category id
+GET {{host}}/exercises/10
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### Get single exercise by exercise id
+GET {{host}}/exercise/343
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### Get daily workout
+GET {{host}}/workouts/daily
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+GET {{host}}/workouts/test
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json

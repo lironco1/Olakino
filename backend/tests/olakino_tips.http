@@ -1,0 +1,15 @@
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "bar.haran1@gmail.com",
+  "password": "P@ssword1234"
+}
+> {%
+    client.global.set("auth_token", response.body.access_token);
+%}
+
+### Get daily workout
+GET {{host}}/tips/daily
+Authorization: Bearer {{auth_token}}
+Accept: application/json
